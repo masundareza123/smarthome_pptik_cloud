@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.17.0
   path: ^1.8.0
   shared_preferences: ^2.0.6
+  flutter_launcher_icons: ^0.9.1
 
 dev_dependencies:
   flutter_test:
@@ -57,11 +58,17 @@ flutter:
 
   assets:
     - lib/assets/logosh.png
+    - lib/assets/logo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "lib/assets/logo.png"
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
