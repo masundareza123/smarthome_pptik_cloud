@@ -6,6 +6,7 @@ import 'package:smarthome_cloud/locator.dart';
 import 'package:smarthome_cloud/services/navigator_service.dart';
 import 'package:smarthome_cloud/ui/router.dart';
 import 'package:smarthome_cloud/ui/views/dashboard_view.dart';
+import 'package:smarthome_cloud/ui/views/startup_view.dart';
 
 void main() {
   // Set `enableInDevMode` to true to see reports while in debug mode
@@ -36,8 +37,8 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       theme: ThemeData.light(),
-      title: 'Survey PPTIK',
-      home: DashboardView(),
+      title: 'Smarthome Cloud',
+      home: StartUpView(),
       debugShowCheckedModeBanner: false,
       navigatorKey: locator<NavigationService>().navigationKey,
       onGenerateRoute: generateRoute,
