@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smarthome_cloud/models/device_data.dart';
 import 'package:smarthome_cloud/services/rmq_service.dart';
 import 'package:smarthome_cloud/services/sqflite_service.dart';
@@ -18,7 +19,9 @@ class DetailDeviceViewState extends State<DetailDeviceView> {
   Device device;
   //bool status = false;
   bool index = false;
-  TextEditingController test = TextEditingController();
+  // String cek;
+  String test1 = "1";
+  String test2 = "11";
 
   //String values = '1';
   RMQService rmqService = new RMQService();
@@ -29,9 +32,18 @@ class DetailDeviceViewState extends State<DetailDeviceView> {
   @override
   void initState() {
     super.initState();
-    //replaceCharAt();
-    index = false;
+    //checkStatus();
   }
+
+  // Future <void> checkStatus() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   if(test1 == '1' || test2 == '11'){
+  //     var index1 = true;
+  //   }else{
+  //     var index1 = false;
+  //   }
+  //   await prefs.setBool('status', index);
+  // }
 
   // @override
   // void replaceCharAt(){
@@ -66,12 +78,8 @@ class DetailDeviceViewState extends State<DetailDeviceView> {
 
   @override
   Widget build(BuildContext context) {
-    test.text = '${device.quantity}';
-    String test1 = "1";
-    String test2 = "11";
     String value1 = test1.replaceAll("1", "0");
     String value2 = test2.replaceAll("11", "00");
-
 
     // void cekState(bool status){
     //   if(test1 == '1'){
