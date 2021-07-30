@@ -50,8 +50,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   if (result != null)
-                    Text(
-                        'Barcode Type: ${describeEnum(result.format)}   Data: ${result.code}')
+                    Text('')
                   else
                     Text('Scan a code'),
                   Row(
@@ -114,7 +113,7 @@ class _QRViewExampleState extends State<QRViewExample> {
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
       key: qrKey,
-      cameraFacing: CameraFacing.front,
+      cameraFacing: CameraFacing.back,
       onQRViewCreated: _onQRViewCreated,
       formatsAllowed: [BarcodeFormat.qrcode],
       overlay: QrScannerOverlayShape(
@@ -138,6 +137,9 @@ class _QRViewExampleState extends State<QRViewExample> {
       // device = Device.fromMap(data);
       // print('ini value nya');
       // print(device);
+      controller.stopCamera();
+      controller.dispose();
+      _navigationService.pop();
       _navigationService.navigateTo(RegisterDeviceViewRoute);
       //_navigationService.navigateTo(RegisterDeviceViewRoute);
     }
@@ -150,6 +152,7 @@ class _QRViewExampleState extends State<QRViewExample> {
       setState(() {
         result = scanData;
         inputQrData(result);
+        controller.dispose();
       });
     });
   }

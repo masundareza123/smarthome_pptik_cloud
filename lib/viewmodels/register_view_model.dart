@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:smarthome_cloud/constants/route_name.dart';
 import 'package:smarthome_cloud/locator.dart';
 import 'package:smarthome_cloud/models/device_data.dart';
+import 'package:smarthome_cloud/services/alert_service.dart';
 import 'package:smarthome_cloud/services/navigator_service.dart';
 import 'package:smarthome_cloud/services/sqflite_service.dart';
 import 'package:smarthome_cloud/viewmodels/base_model.dart';
@@ -19,6 +20,7 @@ class RegisterDeviceViewModel extends BaseModel {
   Device device;
   final Db _db = locator<Db>();
   final NavigationService _navigationService = locator<NavigationService>();
+  final AlertService _alertService = locator<AlertService>();
 
   // String guid;
   // String mac;
@@ -97,7 +99,7 @@ void registerDevice(BuildContext context)async{
         await _db.addDevice(device);
         print('$device');
         print("added");
-        _navigationService.navigateTo(DashboardViewRoute);
+        _alertService.showSuccess(context, "Success", "Device Telah Terdaftar", (){_navigationService.replaceTo(DashboardViewRoute);});
       }
     }catch(e){
 
