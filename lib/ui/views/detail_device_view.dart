@@ -119,7 +119,7 @@ class DetailDeviceViewState extends State<DetailDeviceView> {
       await database.addDevice(device);
       print("update status : ${device.status}");
       print(device);
-      _navigationService.replaceTo(HomeViewRoute);
+      _navigationService.replaceTo(DashboardViewRoute);
     }
     return SafeArea(
         child: Scaffold(
