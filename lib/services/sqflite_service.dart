@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'dart:async';
 
+import  'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-
+import 'package:flutter/material.dart';
 import 'package:smarthome_cloud/models/device_data.dart';
 class Db{
   //static final Db instance = Db._createObject();
@@ -34,7 +35,7 @@ class Db{
       version: 1,
       onCreate: (Database db, int verion) async {
         await db.execute(
-          "CREATE TABLE devices(guid TEXT PRIMARY KEY, mac TEXT, type TEXT, quantity TEXT, name TEXT, version TEXT, minor TEXT)"
+          "CREATE TABLE devices(guid TEXT PRIMARY KEY, mac TEXT, type TEXT, quantity TEXT, name TEXT, version TEXT, minor TEXT, status TEXT)"
         );
       }
     );
@@ -56,12 +57,35 @@ class Db{
         conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
-
   Future<List<Device>> getAllDevice() async {
     final db = await database;
     var response = await db.query('devices');
     List<Device> list = response.map((c) => Device.fromMap(c)).toList();
     print('$response');
     return list;
+  }
+  // fungsi update data
+  // Future<int> update(Device device) async {
+  //   final db = await this.database;
+  //   int count = await db.update('devices', device.toMap(),
+  //       where: 'guid=?', whereArgs: [device.guid]);
+  //   return count;
+  // }
+  Future<int> update(Device device) async {
+    final db = await database;
+    return await db.update(
+      'devices',
+      device.toMap(),
+      where: 'guid = ?',
+      whereArgs: [device.guid],
+    );
+  }
+
+// fungsi hapus data
+  Future<int> delete(String guid) async {
+    Database db = await this.database;
+    int count =
+    await db.delete('devices', where: 'guid=?', whereArgs: [guid]);
+    return count;
   }
 }

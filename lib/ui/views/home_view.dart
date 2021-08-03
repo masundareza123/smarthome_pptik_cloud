@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:smarthome_cloud/locator.dart';
 import 'package:smarthome_cloud/models/device_data.dart';
 import 'package:smarthome_cloud/services/rmq_service.dart';
+import 'package:smarthome_cloud/services/sqflite_service.dart';
 import 'package:smarthome_cloud/ui/shared/ui_helper.dart';
 import 'package:smarthome_cloud/ui/views/qr_view.dart';
 import 'package:smarthome_cloud/viewmodels/home_view_model.dart';
+import 'package:sqflite/sqlite_api.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeView extends StatefulWidget {
@@ -15,15 +18,16 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   RMQService rmqService = new RMQService();
-  bool index;
-
+  final Db _db = locator<Db>();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     setState(() {
-      index = false;
     });
+
+
+
   }
   @override
   Widget build(BuildContext context) {
@@ -106,8 +110,12 @@ class _HomeViewState extends State<HomeView> {
                                                             padding: EdgeInsets.only(right: 10),
                                                             child: Container(
                                                               child: Row(
-                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                 children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(left: 16),
+                                                                    child: Text("Status device ${device.status}", style: TextStyle(color: Colors.black38, fontSize: 20),),
+                                                                  ),
                                                                   Padding(
                                                                       padding: EdgeInsets.only(bottom: 10),
                                                                       child: InkWell(
@@ -120,9 +128,8 @@ class _HomeViewState extends State<HomeView> {
                                                                             decoration: BoxDecoration(
                                                                               borderRadius: BorderRadius.circular(50.0),
                                                                               border: Border.all(
-                                                                                  color: index ? Colors.black : Colors.redAccent
+                                                                                  color: Colors.redAccent
                                                                               ),
-                                                                              color: index ? Colors.redAccent : Colors.white,
                                                                             ),
                                                                             child: Padding(
                                                                               padding: EdgeInsets.all(7),
@@ -131,6 +138,9 @@ class _HomeViewState extends State<HomeView> {
                                                                         ),
                                                                         onTap: () async {
                                                                           await model.navigateDetailDeviceView(context,device);
+                                                                          if (device != null){
+                                                                            //model.updateData(device);
+                                                                          }
                                                                         },
                                                                       )
                                                                   )

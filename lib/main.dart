@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.light(),
       title: 'Smarthome PPTIK',
-      home: StartUpView(),
+      home: DashboardView(),
       debugShowCheckedModeBanner: false,
       navigatorKey: locator<NavigationService>().navigationKey,
       onGenerateRoute: generateRoute,

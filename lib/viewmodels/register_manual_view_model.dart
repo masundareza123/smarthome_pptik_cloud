@@ -43,16 +43,25 @@ class RegisterManualViewModel extends BaseModel {
         var name = nameController.text;
         var version = versionController.text;
         var minor = minorController.text;
+        var status = "mati";
         //guid TEXT PRIMARY KEY, mac TEXT, type TEXT, quantity TEXT, name TEXT, version TEXT, minor TEXT
         device = Device(
-            guid,
-            mac,
-            minor,
-            name,
-            quantity,
-            type,
-            version
-
+            // guid,
+            // mac,
+            // minor,
+            // name,
+            // quantity,
+            // status,
+            // type,
+            // version
+          guid,
+          mac,
+          minor,
+          name,
+          quantity,
+          status,
+          type,
+          version
         );
         print("this is serial number $guid");
         print(device.toMap().toString());

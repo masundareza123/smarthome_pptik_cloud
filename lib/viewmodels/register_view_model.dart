@@ -83,6 +83,7 @@ void registerDevice(BuildContext context)async{
         var name = nameController.text;
         var version = versionController.text;
         var minor = minorController.text;
+        var status = "mati";
         //guid TEXT PRIMARY KEY, mac TEXT, type TEXT, quantity TEXT, name TEXT, version TEXT, minor TEXT
         device = Device(
           guid,
@@ -90,16 +91,16 @@ void registerDevice(BuildContext context)async{
           minor,
           name,
           quantity,
+          status,
           type,
           version
-
         );
         print("this is serial number $guid");
         print(device.toMap().toString());
         await _db.addDevice(device);
         print('$device');
         print("added");
-        _alertService.showSuccess(context, "Success", "Device Telah Terdaftar", (){_navigationService.replaceTo(DashboardViewRoute);});
+        _alertService.showSuccess(context, "Success", "Device berhasil didaftrarkan", (){_navigationService.replaceTo(DashboardViewRoute);});
       }
     }catch(e){
 

@@ -18,8 +18,11 @@ class NavigationService {
         .pushNamed(routeName, arguments: arguments);
   }
 
-  Future<dynamic> replaceTo(String routeName, {dynamic arguments}) {
-    return _navigationKey.currentState
-        .pushNamedAndRemoveUntil(routeName, (route) => false);
+  Future<dynamic> replaceTo(String routeName, {dynamic arguments}) async {
+    Future.delayed(Duration(milliseconds: 500), (){
+      return _navigationKey.currentState
+         .pushNamedAndRemoveUntil(routeName, (route) => false);
+    }
+    );
   }
 }
